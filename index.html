@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Login</title>
+	<meta charset="utf-8"/>
 	<!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style type="text/css">
@@ -48,13 +49,11 @@
 				if(http_request.readyState == 4){
 					var jsonObj = JSON.parse(http_request.responseText);
 					console.log(jsonObj);
-					for (var key in jsonObj){
-						if(jsonObj.hasOwnProperty(key)){
-							console.log(key);
-							if(key.username == username){
-								alert("found!")
-								return true;
-							}
+					console.log(jsonObj[0].username);
+					for (var i = 0; i < jsonObj.length; i++){
+						if(jsonObj[i].username == username && jsonObj[i].password == password){
+							window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
+							return true;
 						}
 					}
 				}

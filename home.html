@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
- 	<title>NHL News</title>
+ 	<title>Sports News</title>
 	<!-- Import jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- Bootstrap CSS -->
@@ -49,35 +49,70 @@
 	<script>
 		//this forces javascript to conform to some rules, like declaring variables with var
 		"use strict";
-	  	var url = "http://www.espn.com/espn/rss/NHL/news";
+	  	var nhl_url = "http://www.espn.com/espn/rss/NHL/news";
+	  	var nfl_url = "http://www.espn.com/espn/rss/NFL/news"
+	  	var mlb_url = "http://www.espn.com/espn/rss/MLB/news"
+	  	//using rssunify tyvm appriciate it
+	  	var all_feeds = "https://feed.rssunify.com/5cae14aa16897/rss.xml";
+	  	var mlb_nfl_feed = "https://feed.rssunify.com/5cae1510bbc44/rss.xml";
+	  	var mlb_nhl_feed = "https://feed.rssunify.com/5cae15518e0e1/rss.xml";
+	  	var nhl_nfl_feed = "https://feed.rssunify.com/5cae15358a2c8/rss.xml";
+	  	var showNHL = true;
+	  	var showNFL = true;
+	  	var showMLB = true;
 		window.onload = function(){
-			init(url);
+			init();
 		}
+		//use RSS Mix
 
-
-		function init(url){
+		function init(){
 			//NHL URL for ESPN RSS feed
 			console.log("Entering Init");	
 			
-	
 			document.querySelector("#content").innerHTML = "<b>Loading news...</b>";
 			$("#content").fadeOut(250);
 			//fetch the data
-			$.get(url).done(function(data){xmlLoaded(data);});
-			alert(data);
+			if(showNHL == true && showNFL == true && showMLB == true){
+				$.get(all_feeds, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showNHL == true && showNFL == true && showMLB == false){
+				$.get(nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showNHL == true && showNFL == false && showMLB == true){
+				$.get(mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showNHL == false && showNFL == true && showMLB == true){
+				$.get(mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showNHL == true){
+				$.get(nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showNFL == true){
+				$.get(nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
+			else if(showMLB == true){
+				$.get(mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				alert(data);
+			}
 		}
 		
 		
 		function xmlLoaded(obj){
-			console.log("obj = " +obj);
+			//console.log("obj = " +obj);
 
 			var items = obj.querySelectorAll("item");
 			
 			//show the logo
-			var image = obj.querySelector("image")
-			var logoSrc = image.querySelector("url").firstChild.nodeValue;
-			var logoLink = image.querySelector("link").firstChild.nodeValue;
-			$("#logo").attr("src",logoSrc);
+			// var image = obj.querySelector("image")
+			// var logoSrc = image.querySelector("url").firstChild.nodeValue;
+			// var logoLink = image.querySelector("link").firstChild.nodeValue;
+			// $("#logo").attr("src",logoSrc);
 			
 			//parse the data
 			var html = "";
@@ -85,7 +120,7 @@
 				//get the data out of the item
 				var newsItem = items[i];
 				var title = newsItem.querySelector("title").firstChild.nodeValue;
-				console.log(title);
+				//console.log(title);
 				var description = newsItem.querySelector("description").firstChild.nodeValue;
 				var link = newsItem.querySelector("link").firstChild.nodeValue;
 				var pubDate = newsItem.querySelector("pubDate").firstChild.nodeValue;
@@ -106,7 +141,36 @@
 		
 		}	
 	  
-	  
+	  	function changeNHL(){
+	  		if(showNHL){
+				showNHL= false;
+				init();
+			}
+	  		else{
+	  			showNHL = true;
+	  			init();
+	  		}
+	  	}
+	  	function changeNFL(){
+	  		if(showNFL){
+				showNFL= false;
+				init();
+			}
+	  		else{
+	  			showNFL = true;
+	  			init();
+	  		}
+	  	}
+	  	function changeMLB(){
+	  		if(showMLB){
+				showMLB= false;
+				init();
+			}
+	  		else{
+	  			showMLB = true;
+	  			init();
+	  		}
+	  	}
 	  
 	</script>
   
@@ -115,8 +179,13 @@
 <body>
 
 	<div id="header">
-		<img id="logo" /><h1>Hockey News</h1>
+		<img id="logo" /><h1>News</h1>
 	</div>
+	<div id="news">
+		<button class="btn btn-secondary mr-5" onclick="changeNHL()">NHL</button>
+		<button class="btn btn-secondary mr-5" onclick="changeNFL()">NFL</button>
+		<button class="btn btn-secondary mr-5" onclick="changeMLB()">MLB</button>
+	</div>	
 
 	<div id="content">
 		<p>No data has been loaded.</p>
