@@ -21,6 +21,8 @@
 		}
 	</style>
 	<script type="application/javascript">
+		const saveToFile = [];
+
 		function loadJSON(username, password){
 			console.log("form submitted");
 			var data_file = "data.json";
@@ -63,42 +65,32 @@
 
 		function saveInfo(user, pass){
 			var data_file = "data.json";
-			var http_request = new XMLHttpRequest();
-			 try{
-               // Opera 8.0+, Firefox, Chrome, Safari
-               http_request = new XMLHttpRequest();
-            }catch (e){
-               // Internet Explorer Browsers
-               try{
-                  http_request = new ActiveXObject("Msxml2.XMLHTTP");
-          
-               }catch (e) {
-        
-                  try{
-                     http_request = new ActiveXObject("Microsoft.XMLHTTP");
-                  }catch (e){
-                     // Something went wrong
-                     alert("Your browser broke!");
-                     return false;
-                  }
-          
-               }
-            }
-            http_request.onreadystatechange = function(){
-				if(http_request.readyState == 4){
-					var jsonObj = JSON.parse(http_request.responseText);
-					console.log("jsonObj: " + jsonObj);
-					console.log("Username: " +jsonObj[0].username);
-					jsonObj.push({
-						username: user,
-						password: pass
-					});
-					console.log("Added: " + jsonObj[1].username);
-					JSON.stringify(jsonObj);
-				}
-			}
-			http_request.open("GET", data_file, true);
-			http_request.send();
+	        const xhr = new XMLHttpRequest();
+	        xhr.open('POST', data_file);
+	        xhr.setRequestHeader('Content-Type', 'application/json');
+	        xhr.addEventListener('load', function() {
+	          if (this.status === 201) { // we've successfully posted
+	            namesToDisplay.push({
+	            	"username": user,
+	            	"password": pass
+	            });
+	            updateDisplayedNames();
+	          }
+	        });
+	        xhr.send(JSON.stringify({name}));
+		}
+
+		function getDataFromFile(){
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'data.json');
+       	 	xhr.addEventListener('load', function() {
+          	const response = JSON.parse(this.responseText);
+          	console.log("response: " + response);
+          	const remoteNames = response.filter((n) => n.length); // make sure we
+                                                                // axe empties
+          		remoteValues.forEach((n) => saveToFile.push(n));
+        	});
+        	xhr.send();
 		}	
 	</script>
 </head>
