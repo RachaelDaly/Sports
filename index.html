@@ -21,79 +21,55 @@
 		}
 	</style>
 	<script type="application/javascript">
-		const saveToFile = [];
-
-		function loadJSON(username, password){
-			console.log("form submitted");
-			var data_file = "data.json";
-			var http_request = new XMLHttpRequest();
-			 try{
-               // Opera 8.0+, Firefox, Chrome, Safari
-               http_request = new XMLHttpRequest();
-            }catch (e){
-               // Internet Explorer Browsers
-               try{
-                  http_request = new ActiveXObject("Msxml2.XMLHTTP");
-          
-               }catch (e) {
-        
-                  try{
-                     http_request = new ActiveXObject("Microsoft.XMLHTTP");
-                  }catch (e){
-                     // Something went wrong
-                     alert("Your browser broke!");
-                     return false;
-                  }
-          
-               }
-            }
-            console.log("requesting data");
-			http_request.onreadystatechange = function(){
-				if(http_request.readyState == 4){
-					var jsonObj = JSON.parse(http_request.responseText);
-					console.log(jsonObj);
-					console.log(jsonObj[0].username);
-					for (var i = 0; i < jsonObj.length; i++){
-						if(jsonObj[i].username == username && jsonObj[i].password == password){
-							window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
-							return true;
-						}
-					}
-				}
-			}
-			http_request.open("GET", data_file, true);
-			http_request.send();
-		}
-
-		function saveInfo(user, pass){
-			var data_file = "data.json";
-	        const xhr = new XMLHttpRequest();
-	        xhr.open('POST', data_file);
-	        xhr.setRequestHeader('Content-Type', 'application/json');
-	        xhr.addEventListener('load', function() {
-	          if (this.status === 201) { // we've successfully posted
-	            namesToDisplay.push({
-	            	"username": user,
-	            	"password": pass
-	            });
-	            updateDisplayedNames();
-	          }
-	        });
-	        xhr.send(JSON.stringify({name}));
-		}
-
-		function getDataFromFile(){
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'data.json');
-       	 	xhr.addEventListener('load', function() {
-          	const response = JSON.parse(this.responseText);
-          	console.log("response: " + response);
-          	const remoteNames = response.filter((n) => n.length); // make sure we
+		const namesToDisplay = [];
+      /* add appropriate event listeners */
+      const prepareEvents = function() {
+        const button = document.getElementById('btn');
+        button.addEventListener('click', handleInput);
+      };
+      /* pull data from the api and update the state with the names */
+      const getDataFromTextFile = function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'names.php');
+        xhr.addEventListener('load', function() {
+          const response = JSON.parse(this.responseText);
+          const remoteNames = response.filter((n) => n.length); // make sure we
                                                                 // axe empties
-          		remoteValues.forEach((n) => saveToFile.push(n));
-        	});
-        	xhr.send();
-		}	
+          remoteNames.forEach((n) => namesToDisplay.push(n));
+        });
+        xhr.send();
+      };
+      /* get the value of the text box and submit it */
+      const handleInput = function() {
+        const name = document.getElementById('username').value;
+        const pswd = document.getElementById('password').value;
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'names.php');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.addEventListener('load', function() {
+          if (this.status === 201) { // we've successfully posted
+            namesToDisplay.push(name);
+          }
+        });
+        xhr.send(JSON.stringify({name}));
+      }
+
+      const checkInput = function(){
+      	const name = document.getElementById('username').value;
+        const pswd = document.getElementById('password').value;
+      	for element in namesToDisplay{
+      		if(element == name){
+      			window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
+      		}
+      	}
+      }
+
+      window.onload = function() {
+        // setup events
+        prepareEvents();
+        // load initial data
+        getDataFromTextFile();
+      };
 	</script>
 </head>
 <body>
@@ -110,7 +86,7 @@
 			</div>
 			<div class="text-center">
 				<input type="button" class="btn btn-primary" value="Login" onclick="loadJSON(document.getElementById('username').value, document.getElementById('password').value)">
-				<input type="button" class="btn btn-primary" value="Create User" onclick="saveInfo(document.getElementById('username').value, document.getElementById('password').value)">
+				<input type="button" class="btn btn-primary" value="Create User" onclick="handleInput()">
 			</div>
 		</form>
 	</div>
