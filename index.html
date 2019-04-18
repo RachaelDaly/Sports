@@ -49,6 +49,7 @@
         xhr.addEventListener('load', function() {
           if (this.status === 201) { // we've successfully posted
             namesToDisplay.push(name);
+            namesToDisplay.push(pswd);
           }
         });
         console.log("handleInput: " + namesToDisplay);
