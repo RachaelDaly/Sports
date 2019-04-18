@@ -52,8 +52,8 @@
             namesToDisplay.push(pswd);
           }
         });
-        console.log("handleInput: " + namesToDisplay);
-        xhr.send(JSON.stringify({name}));
+        //console.log("handleInput: " + namesToDisplay);
+        xhr.send(JSON.stringify({name, pswd}));
       }
 
       const checkInput = function(){
@@ -62,10 +62,10 @@
       	const name = document.getElementById('username').value;
         const pswd = document.getElementById('password').value;
       	for (element in namesToDisplay){
-          console.log(namesToDisplay);
-          console.log(element);
+          //console.log(namesToDisplay);
+          //console.log(element);
           if(namesToDisplay[element] == pswd && is_username){
-            console.log("yeah its right lmao");
+            //console.log("yeah its right lmao");
             window.location.href = "http://www.se.rit.edu/~rld5989/swen344/sportsRSS/home.html";
           }
       		if(namesToDisplay[element] == name){
