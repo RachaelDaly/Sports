@@ -30,7 +30,7 @@
       /* pull data from the api and update the state with the names */
       const getDataFromTextFile = function() {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'data.php');
+        xhr.open('GET', 'data.txt');
         xhr.addEventListener('load', function() {
           const response = JSON.parse(this.responseText);
           const remoteNames = response.filter((n) => n.length); // make sure we
@@ -44,7 +44,7 @@
         const name = document.getElementById('username').value;
         const pswd = document.getElementById('password').value;
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'data.php');
+        xhr.open('POST', 'data.txt');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.addEventListener('load', function() {
           if (this.status === 201) { // we've successfully posted
@@ -56,15 +56,19 @@
       }
 
       const checkInput = function(){
+        var is_username = false;
         console.log('checking input');
       	const name = document.getElementById('username').value;
         const pswd = document.getElementById('password').value;
       	for (element in namesToDisplay){
           console.log(namesToDisplay);
           console.log(element);
-      		if(element == name){
+          if(element == pswd && is_username){
             console.log("yeah its right lmao");
-      			window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
+            window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
+          }
+      		if(element == name){
+            is_username = true;
       		}
       	}
       }
