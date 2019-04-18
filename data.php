@@ -9,8 +9,10 @@
   // if there is data, add it to the list
   // otherwise, reply with all data
   if ($data) {
-    file_put_contents('data.txt', $data['name'] . "\n", FILE_APPEND);
-    file_put_contents('data.txt', $data['pswd'] . "\n", FILE_APPEND);
+    //file_put_contents('data.txt', $data['name'] . "\n", FILE_APPEND);
+    file = fopen('data.txt', 'w');
+    fwrite('data.txt', $data);
+    fclose('data.txt');
     set_status_code(201);
   } else {
     // the double quotes are for interpretation of the newline character
