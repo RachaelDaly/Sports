@@ -63,11 +63,11 @@
       	for (element in namesToDisplay){
           console.log(namesToDisplay);
           console.log(element);
-          if(element == pswd && is_username){
+          if(namesToDisplay[element] == pswd && is_username){
             console.log("yeah its right lmao");
             window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
           }
-      		if(element == name){
+      		if(namesToDisplay[element] == name){
             is_username = true;
       		}
       	}
