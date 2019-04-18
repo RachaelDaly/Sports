@@ -6,7 +6,6 @@
   }
   // read any incoming data
   $data = json_decode(file_get_contents('php://input'), true);
-  echo $data;
   // if there is data, add it to the list
   // otherwise, reply with all data
   if ($data) {
