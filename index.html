@@ -51,6 +51,7 @@
             namesToDisplay.push(name);
           }
         });
+        console.log("handleInput: " + namesToDisplay);
         xhr.send(JSON.stringify({name}));
       }
 
@@ -59,6 +60,7 @@
         const pswd = document.getElementById('password').value;
       	for (element in namesToDisplay){
       		if(element == name){
+            console.log("yeah its right lmao");
       			window.location.href = "file:///Users/RachaelDaly/Documents/Spring2019/swen344/ip/home.html";
       		}
       	}
@@ -66,7 +68,7 @@
 
       window.onload = function() {
         // setup events
-        handleInput();
+        //handleInput();
         // load initial data
         getDataFromTextFile();
       };
