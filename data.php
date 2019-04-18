@@ -1,5 +1,5 @@
 <?php
-  $FILEPATH = 'data.json';
+  $FILEPATH = 'data.txt';
   // for compatibility with older php versions
   function set_status_code($value) {
     header('X-PHP-Response Code', true, 201); 
@@ -9,7 +9,7 @@
   // if there is data, add it to the list
   // otherwise, reply with all data
   if ($data) {
-    file_put_contents('data.json', $data['name'] . "\n", FILE_APPEND);
+    file_put_contents('data.txt', $data['name'] . "\n", FILE_APPEND);
     set_status_code(201);
   } else {
     // the double quotes are for interpretation of the newline character

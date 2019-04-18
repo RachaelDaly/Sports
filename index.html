@@ -30,7 +30,7 @@
       /* pull data from the api and update the state with the names */
       const getDataFromTextFile = function() {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'data.txt');
+        xhr.open('GET', 'data.php');
         xhr.addEventListener('load', function() {
           const response = JSON.parse(this.responseText);
           const remoteNames = response.filter((n) => n.length); // make sure we
@@ -44,7 +44,7 @@
         const name = document.getElementById('username').value;
         const pswd = document.getElementById('password').value;
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'data.txt');
+        xhr.open('POST', 'data.php');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.addEventListener('load', function() {
           if (this.status === 201) { // we've successfully posted
