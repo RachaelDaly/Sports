@@ -53,6 +53,7 @@
           }
         });
         //console.log("handleInput: " + namesToDisplay);
+        console.log(JSON.stringify({name, pswd}));
         xhr.send(JSON.stringify({name, pswd}));
       }
 
