@@ -49,15 +49,15 @@
 	<script>
 		//this forces javascript to conform to some rules, like declaring variables with var
 		"use strict";
-		const proxyurl = "https://cors-anywhere.herokuapp.com/";
+		const proxyurl = "http://crossorigin.me/";
 	  	var nhl_url = "http://www.espn.com/espn/rss/NHL/news";
 	  	var nfl_url = "http://www.espn.com/espn/rss/NFL/news"
 	  	var mlb_url = "http://www.espn.com/espn/rss/MLB/news"
 	  	//using rssunify tyvm appriciate it
-	  	var all_feeds = "https://feed.rssunify.com/5cae14aa16897/rss.xml";
-	  	var mlb_nfl_feed = "https://feed.rssunify.com/5cae1510bbc44/rss.xml";
-	  	var mlb_nhl_feed = "https://feed.rssunify.com/5cae15518e0e1/rss.xml";
-	  	var nhl_nfl_feed = "https://feed.rssunify.com/5caf5d198b291/rss.xml";
+	  	var all_feeds = "http://www.rssmix.com/u/8317200/rss.xml";
+	  	var mlb_nfl_feed = "http://www.rssmix.com/u/8317202/rss.xml";
+	  	var mlb_nhl_feed = "http://www.rssmix.com/u/8317203/rss.xml";
+	  	var nhl_nfl_feed = "http://www.rssmix.com/u/8317201/rss.xml";
 	  	var showNHL = true;
 	  	var showNFL = true;
 	  	var showMLB = true;
@@ -78,27 +78,27 @@
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == true && showMLB == false){
-				$.get(proxyurl +nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == false && showMLB == true){
-				$.get(proxyurl +mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == false && showNFL == true && showMLB == true){
-				$.get(proxyurl +mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true){
-				$.get(proxyurl +nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNFL == true){
-				$.get(proxyurl +nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showMLB == true){
-				$.get(proxyurl +mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 		}
@@ -131,7 +131,7 @@
 				line += "<h2>"+title+"</h2>";
 				line += '<p><i>'+pubDate+'</i> - <a href="'+link+'" target="_blank">See original</a></p>';
 				//title and description are always the same (for some reason) so I'm only including one
-				line += '<p>Favorite</p>';
+				//line += '<p>Favorite</p>';
 				//line += "<p>"+description+"</p>";
 				line += "</div>";
 				
