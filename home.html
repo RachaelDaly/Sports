@@ -49,6 +49,7 @@
 	<script>
 		//this forces javascript to conform to some rules, like declaring variables with var
 		"use strict";
+		const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	  	var nhl_url = "http://www.espn.com/espn/rss/NHL/news";
 	  	var nfl_url = "http://www.espn.com/espn/rss/NFL/news"
 	  	var mlb_url = "http://www.espn.com/espn/rss/MLB/news"
@@ -73,31 +74,31 @@
 			$("#content").fadeOut(250);
 			//fetch the data
 			if(showNHL == true && showNFL == true && showMLB == true){
-				$.get(all_feeds, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl + all_feeds, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == true && showMLB == false){
-				$.get(nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == false && showMLB == true){
-				$.get(mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == false && showNFL == true && showMLB == true){
-				$.get(mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true){
-				$.get(nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNFL == true){
-				$.get(nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showMLB == true){
-				$.get(mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(proxyurl +mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 		}
