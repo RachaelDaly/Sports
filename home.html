@@ -26,8 +26,7 @@
 			vertical-align: middle;
 			padding-left: 1em;
 			padding-right: 1em;
-		}
-		
+		}		
 		.item {
 			border: 1px solid red;
 			padding: 1em;
@@ -130,7 +129,7 @@
 				line += "<h2>"+title+"</h2>";
 				line += '<p><i>'+pubDate+'</i> - <a href="'+link+'" target="_blank">See original</a></p>';
 				//title and description are always the same (for some reason) so I'm only including one
-				line += '<input type="checkbox" class="form-check-input">Favorite<br>';
+				line += '<input id="check" type="checkbox" class="form-check-input">Favorite<br>';
 				//line += "<p>"+description+"</p>";
 				line += "</div>";
 				
