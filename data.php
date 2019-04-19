@@ -6,8 +6,9 @@
   }
   // read any incoming data
   $data = json_decode(file_get_contents('php://input'), true);
-  $array = json_decode($_POST['jsondata']);
-  file_put_contents('data.txt', $data);
+  $fp = fopen(FILEPATH, 'w');
+  fwrite($fp, $data);
+  fclose($fp);
   // if there is data, add it to the list
   // otherwise, reply with all data
   if ($data) {
