@@ -9,7 +9,7 @@
   // if there is data, add it to the list
   // otherwise, reply with all data
   if ($data) {
-    file_put_contents('data.txt', $data['name'] . "\n", FILE_APPEND);
+    file_put_contents('data.txt', $data);
     set_status_code(201);
   } else {
     // the double quotes are for interpretation of the newline character

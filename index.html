@@ -53,8 +53,8 @@
           }
         });
         //console.log("handleInput: " + namesToDisplay);
-        console.log(JSON.stringify({name, pswd}));
-        xhr.send(JSON.stringify({name, pswd}));
+        console.log(namesToDisplay);
+        xhr.send(JSON.stringify(namesToDisplay));
       }
 
       const checkInput = function(){
