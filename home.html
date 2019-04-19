@@ -73,31 +73,31 @@
 			$("#content").fadeOut(250);
 			//fetch the data
 			if(showNHL == true && showNFL == true && showMLB == true){
-				$.get(proxyurl + all_feeds, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(all_feeds, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == true && showMLB == false){
-				$.get(proxyurl + nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(nhl_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true && showNFL == false && showMLB == true){
-				$.get(proxyurl + mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(mlb_nhl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == false && showNFL == true && showMLB == true){
-				$.get(proxyurl + mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(mlb_nfl_feed, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNHL == true){
-				$.get(proxyurl + nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(nhl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showNFL == true){
-				$.get(proxyurl + nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(nfl_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 			else if(showMLB == true){
-				$.get(proxyurl + mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
+				$.get(mlb_url, {crossdomain:true}).done(function(data){xmlLoaded(data);});
 				alert(data);
 			}
 		}
